@@ -46,4 +46,5 @@ __all__ = [
     'connect',
     'logging',
     'dictfetchall',
+    'dictfetchone',
 ]

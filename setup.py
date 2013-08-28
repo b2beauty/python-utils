@@ -12,6 +12,6 @@ setup(
     long_description=open('README.txt').read(),
     install_requires=[
         "pika >= 0.9.13",
-        "MySQL-python >= 1.2.4",
+        "MySQL-python >= 1.2",
     ],
 )
