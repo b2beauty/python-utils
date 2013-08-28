@@ -2,11 +2,10 @@ from distutils.core import setup
 
 setup(
     name='NaveggUtils',
-    version='0.1.0',
+    version='0.1.1',
     author='Felipe Arenhardt Tomaz',
     author_email='felipa.a.tomaz@gmail.com',
     packages=['navegg_utils'],
-    #scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
     url='http://www.navegg.com/',
     license='LICENSE.txt',
     description='Navegg Utils - Python Library.',
