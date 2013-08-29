@@ -9,6 +9,8 @@ History:
     0.2 <2013-08-28> Add function dictfetchone
 '''
 
+import connect
+
 def dictfetchall(cursor):
     '''Returns all rows from a cursor as a dict
 
@@ -44,7 +46,6 @@ Example of use:
 
 __all__ = [
     'connect',
-    'logging',
     'dictfetchall',
     'dictfetchone',
 ]

@@ -9,13 +9,15 @@ This fragment of the lib is intended to provide all types of connections
 projects undertaken in the Naveeg. eg: Database, Queue
 History:
     0.2 <2013-08-28> Add Queue class
+    0.3 <2013-08-29> Alter methods on Queue class to private, documented
+    function and add option for unbuffer cursor in mysql connection    
 '''
 
 import simplejson
 import MySQLdb
 import pika
 
-def mysql(host,user,password,database=None,autocommit=True):
+def mysql(host,user,password,database=None,autocommit=True,buffer=True):
     '''Connects to a database as parameters informed.
 If the database argument is informed only the cursor will be returned, 
 but if not informed a database will be returned also the connection to
@@ -37,8 +39,11 @@ Example of use:
         connection = MySQLdb.connect(host, user, password)
     except MySQLdb.connector.Error as err:
         raise err
-        
-    cursor = connection.cursor()
+    
+    if buffer:
+        cursor = connection.cursor()
+    else:
+        cursor = MySQLdb.cursors.SSCursor(connection)
     if autocommit:
         cursor.execute('set autocommit = 1')
     if database:
@@ -72,15 +77,27 @@ Example of use:
             )
         )
 
-    def getChannel(self):
+    def __getChannel(self):
         return self.connection.channel()
 
     def getQueue(self,queue):
-        channel = self.getChannel()
-        channel.queue_declare(queue=queue, durable=True,exclusive=False)
+        channel = self.__getChannel()
+        channel.queue_declare(queue=queue, durable=True, exclusive=False)
         return channel
         
     def sendPackage(self,queue,name,package):
+        '''Send package for one queue connected in server
+        
+Example of use:
+
+    from navegg_utils import connect
+
+    package = ['a','b','c']
+
+    channel = connect.Queue()
+    queue = channel.getQueue('name')
+    channel.sendPackage(queue,'name',package)'''
+    
         try:
             if not len(package) and type(package) not in [dict,list,tuple]:
                 raise Exception('Type not is dict or list or tuple')
@@ -94,13 +111,26 @@ Example of use:
         except Exception as error:
             raise
             
-    def loadPackageValue(self,ch,method,properties,body):
+    def __loadPackageValue(self,ch,method,properties,body):
         decoded_body = simplejson.loads(body)
         self.function(decoded_body)
         ch.basic_ack(delivery_tag = method.delivery_tag)
 
     def receivePackage(self,queue,name,function):
+        '''receive package for one queue connected in server
+        
+Example of use:
+
+    from navegg_utils import connect
+
+    def fn(pack):
+        print pack
+
+    channel = connect.Queue()
+    queue = channel.getQueue('name')
+    channel.receivePackage(queue,'name',fn)'''
+    
         self.function = function
         queue.basic_qos(prefetch_count=1)
-        queue.basic_consume(self.loadPackageValue,queue=name)
+        queue.basic_consume(self.__loadPackageValue,queue=name)
         queue.start_consuming()
