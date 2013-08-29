@@ -40,7 +40,7 @@ Example of use:
     
     try:
         connection = MySQLdb.connect(hots=host, user=user, passwd=password, port=port)
-    except MySQLdb.connector.Error as err:
+    except MySQLdb.Error as err:
         raise err
     
     if buffer:
