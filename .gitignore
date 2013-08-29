@@ -7,7 +7,4 @@
 *.pyo
 *.swp
 *.gz
-*.pyc
-*.pyo
-*.swp
 build
