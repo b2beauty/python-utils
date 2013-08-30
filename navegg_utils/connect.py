@@ -20,7 +20,7 @@ import simplejson
 import MySQLdb
 import pika
 
-def mysql(host,user,password,database=None,port='3306',autocommit=True,buffer=True):
+def mysql(host,user,password,database=None,port=3306,autocommit=True,buffer=True):
     '''Connects to a database as parameters informed.
 If the database argument is informed only the cursor will be returned, 
 but if not informed a database will be returned also the connection to
