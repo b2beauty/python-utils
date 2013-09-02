@@ -3,3 +3,4 @@ v0.1.1, 2013-08-28 -- Add function dictfetchone.
 v0.1.2, 2013-08-28 -- Change queue method to abstract class for generals funcions.
 v0.1.3, 2013-08-29 -- Alter methods on Queue class to private, documented function and add option for unbuffer cursor in mysql connection.
 v0.1.4, 2013-08-29 -- Add port argument in mysql connection function
+v0.1.5, 2013-09-02 -- Add exception in json loader if body not one json

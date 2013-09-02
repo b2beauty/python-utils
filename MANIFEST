@@ -5,3 +5,4 @@ README.txt
 setup.py
 navegg_utils/__init__.py
 navegg_utils/connect.py
+navegg_utils/nvgloggin.py

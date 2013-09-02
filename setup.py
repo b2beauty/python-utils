@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='NaveggUtils',
-    version='0.1.4',
+    version='0.1.5',
     author='Felipe Arenhardt Tomaz',
     author_email='felipa.a.tomaz@gmail.com',
     packages=['navegg_utils'],

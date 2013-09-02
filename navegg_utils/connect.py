@@ -3,24 +3,22 @@
 
 '''Make connections for all in the world
 
-Author Tomaz Felipe <felipe.a.tomaz@gmail.com>
-Reviser:
-     Viero Rafael <frnakyviero@gmail.com>
+Author <felipe.a.tomaz@gmail.com>
 Created: 27/08/2013
 This fragment of the lib is intended to provide all types of connections
 projects undertaken in the Naveeg. eg: Database, Queue
 History:
     0.2 <2013-08-28> Add Queue class
     0.3 <2013-08-29> Alter methods on Queue class to private, documented
-    function and add option for unbuffer cursor in mysql connection    
-    0.4 <2013-08-28> <Viero> Add port argument in mysql connection function
+    function and add option for unbuffer cursor in mysql connection
+    0.4 <2013-09-02> Add exception in json loader if body not one json
 '''
 
 import simplejson
 import MySQLdb
 import pika
 
-def mysql(host,user,password,database=None,port=3306,autocommit=True,buffer=True):
+def mysql(host,user,password,database=None,autocommit=True,buffer=True):
     '''Connects to a database as parameters informed.
 If the database argument is informed only the cursor will be returned, 
 but if not informed a database will be returned also the connection to
@@ -39,8 +37,8 @@ Example of use:
     cursor, connection = connect.mysql ('host', 'myuser', 'passwd')'''
     
     try:
-        connection = MySQLdb.connect(host=host, user=user, passwd=password, port=port)
-    except MySQLdb.Error as err:
+        connection = MySQLdb.connect(host, user, password)
+    except MySQLdb.connector.Error as err:
         raise err
     
     if buffer:
@@ -105,7 +103,10 @@ Example of use:
             if not len(package) and type(package) not in [dict,list,tuple]:
                 raise Exception('Type not is dict or list or tuple')
                 
-            json_package = simplejson.dumps(package)
+            try:
+                json_package = simplejson.dumps(package)
+            except Exception as error:
+                raise
             queue.basic_publish(exchange='',routing_key=name,
                                 body=json_package,
                                 properties=pika.BasicProperties(
@@ -115,7 +116,12 @@ Example of use:
             raise
             
     def __loadPackageValue(self,ch,method,properties,body):
-        decoded_body = simplejson.loads(body)
+        try:
+            decoded_body = simplejson.loads(body)
+        except Exception:
+            ch.basic_ack(delivery_tag = method.delivery_tag)
+            return
+            
         self.function(decoded_body)
         ch.basic_ack(delivery_tag = method.delivery_tag)
 
