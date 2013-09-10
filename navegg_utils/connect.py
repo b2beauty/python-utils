@@ -3,7 +3,9 @@
 
 '''Make connections for all in the world
 
-Author <felipe.a.tomaz@gmail.com>
+Author Tomaz Felipe <felipe.a.tomaz@gmail.com>
+Reviser:
+     Viero Rafael <frnakyviero@gmail.com
 Created: 27/08/2013
 This fragment of the lib is intended to provide all types of connections
 projects undertaken in the Naveeg. eg: Database, Queue
@@ -11,14 +13,15 @@ History:
     0.2 <2013-08-28> Add Queue class
     0.3 <2013-08-29> Alter methods on Queue class to private, documented
     function and add option for unbuffer cursor in mysql connection
-    0.4 <2013-09-02> Add exception in json loader if body not one json
+    0.4 <2013-08-28> <Viero> Add port argument in mysql connection function
+    0.5 <2013-09-02> Add exception in json loader if body not one json
 '''
 
 import simplejson
 import MySQLdb
 import pika
 
-def mysql(host,user,password,database=None,autocommit=True,buffer=True):
+def mysql(host,user,password,database=None,port=3306,autocommit=True,buffer=True):
     '''Connects to a database as parameters informed.
 If the database argument is informed only the cursor will be returned, 
 but if not informed a database will be returned also the connection to
@@ -38,7 +41,7 @@ Example of use:
     
     try:
         connection = MySQLdb.connect(host, user, password)
-    except MySQLdb.connector.Error as err:
+    except MySQLdb.Error as err:
         raise err
     
     if buffer:
