@@ -40,7 +40,7 @@ Example of use:
     cursor, connection = connect.mysql ('host', 'myuser', 'passwd')'''
     
     try:
-        connection = MySQLdb.connect(host, user, password)
+        connection = MySQLdb.connect(host=host, user=user, passwd=password,port=port)
     except MySQLdb.Error as err:
         raise err
     

@@ -43,7 +43,7 @@ Example of use:
     return dict(
         zip(
             [col[0] for col in cursor.description],
-            cursor.fetchaone()
+            cursor.fetchone()
         ))
 
 def timeit(method):
