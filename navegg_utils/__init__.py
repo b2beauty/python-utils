@@ -24,10 +24,13 @@ Example of use:
     cursor.execute('show tables')
     rows = dictfetchall(cursor)'''
     
-    return [
-        dict(zip([col[0] for col in cursor.description], row))
-        for row in cursor.fetchall()
-    ]
+    try:
+        return [
+            dict(zip([col[0] for col in cursor.description], row))
+            for row in cursor.fetchall()
+        ]
+    except:
+        return []
     
 def dictfetchone(cursor):
     '''Returns one row from a cursor as a dict
@@ -40,11 +43,14 @@ Example of use:
     cursor.execute('show tables')
     row = dictfetchone(cursor)'''
     
-    return dict(
-        zip(
-            [col[0] for col in cursor.description],
-            cursor.fetchone()
-        ))
+    try:
+        return dict(
+            zip(
+                [col[0] for col in cursor.description],
+                cursor.fetchone()
+            ))
+    except:
+        return {}
 
 def timeit(method):
     '''Decorator to calculate execute time for a function
