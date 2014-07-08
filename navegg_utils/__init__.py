@@ -12,6 +12,10 @@ History:
 
 import time
 import connect
+import test
+
+__version__ = '0.1.8'
+
 
 def dictfetchall(cursor):
     '''Returns all rows from a cursor as a dict
@@ -23,7 +27,7 @@ Example of use:
     cursor = connect.mysql('host', 'myuser', 'passwd', 'database')
     cursor.execute('show tables')
     rows = dictfetchall(cursor)'''
-    
+
     try:
         return [
             dict(zip([col[0] for col in cursor.description], row))
@@ -31,7 +35,8 @@ Example of use:
         ]
     except:
         return []
-    
+
+
 def dictfetchone(cursor):
     '''Returns one row from a cursor as a dict
 
@@ -42,7 +47,7 @@ Example of use:
     cursor = connect.mysql('host', 'myuser', 'passwd', 'database')
     cursor.execute('show tables')
     row = dictfetchone(cursor)'''
-    
+
     try:
         return dict(
             zip(
@@ -52,13 +57,14 @@ Example of use:
     except:
         return {}
 
+
 def timeit(method):
     '''Decorator to calculate execute time for a function
-    
+
 Example of use:
 
     from navegg_utils import timeit
-    
+
     class a(object):
         @timeit
         def b(self,c,d):
@@ -67,7 +73,7 @@ Example of use:
     if __name__ == '__main__':
         e = a()
         e.b(5,4)
-        
+
 Out of execute is:
 
     Time to execute 'b': 0.000002 sec'''
@@ -77,7 +83,7 @@ Out of execute is:
         result = method(*args, **kw)
         te = time.time()
 
-        print 'Time to execute %r: %f sec' %(method.__name__, te-ts)
+        print 'Time to execute %r: %f sec' % (method.__name__, te-ts)
         return result
 
     return timed
@@ -87,4 +93,5 @@ __all__ = [
     'dictfetchall',
     'dictfetchone',
     'timeit',
+    'test'
 ]

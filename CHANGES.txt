@@ -6,3 +6,4 @@ v0.1.4, 2013-08-29 -- Add port argument in mysql connection function
 v0.1.5, 2013-09-02 -- Add exception in json loader if body not one json
 v0.1.6, 2013-09-02 -- Add decorator function timeit
 v0.1.7, 2014-06-17 -- Fix zip exception 
+v0.1.8, 2014-07-08 -- Add test basic classes 
