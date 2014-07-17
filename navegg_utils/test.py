@@ -4,7 +4,6 @@
 import os
 import platform
 import unittest
-from selenium import webdriver
 
 
 class NaveggBaseTest(unittest.TestCase):

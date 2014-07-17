@@ -14,7 +14,7 @@ import time
 import connect
 import test
 
-__version__ = '0.1.8'
+__version__ = '0.1.9'
 
 
 def dictfetchall(cursor):

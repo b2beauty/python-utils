@@ -15,15 +15,18 @@ History:
     function and add option for unbuffer cursor in mysql connection
     0.4 <2013-08-28> <Viero> Add port argument in mysql connection function
     0.5 <2013-09-02> Add exception in json loader if body not one json
+    0.6 <2014-07-17> Add suport to dictcursor and charset in mysql function
+    and use custom cursors class to safe errors in execution
 '''
 
 import simplejson
-import MySQLdb
 import pika
+import MySQLdb
+from navegg_utils import cursors, connections
 
 
-def mysql(host, user, password, database=None, port=3306,
-          autocommit=True, buffer=True):
+def mysql(host, user, password, database='', port=3306,
+          autocommit=True, buffer=True, charset='utf8', dictcursor=False):
     '''Connects to a database as parameters informed.
 If the database argument is informed only the cursor will be returned,
 but if not informed a database will be returned also the connection to
@@ -39,22 +42,29 @@ Example of use:
     Without informing the database:
 
     from navegg_utils import connect
-    cursor, connection = connect.mysql ('host', 'myuser', 'passwd')'''
+    cursor, connection = connect.mysql('host', 'myuser', 'passwd')'''
 
     try:
-        connection = MySQLdb.connect(host=host, user=user,
-                                     passwd=password, port=port)
+        connection = connections.connect(host=host, user=user,
+                                         passwd=password, port=port,
+                                         charset=charset, db=database)
     except MySQLdb.Error as err:
         raise err
 
-    if buffer:
-        cursor = connection.cursor()
+    if dictcursor:
+        if buffer:
+            cursor = cursors.DictCursor(connection)
+        else:
+            cursor = cursors.SSDictCursor(connection)
     else:
-        cursor = MySQLdb.cursors.SSCursor(connection)
+        if buffer:
+            cursor = cursors.Cursor(connection)
+        else:
+            cursor = cursors.SSCursor(connection)
+
     if autocommit:
-        cursor.execute('set autocommit = 1')
+        connection.autocommit(True)
     if database:
-        connection.select_db(database)
         return cursor
 
     return (cursor, connection)
