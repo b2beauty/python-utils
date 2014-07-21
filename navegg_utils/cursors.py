@@ -20,6 +20,7 @@ def try_reconnect(obj, **kwargs):
     from navegg_utils import connections
 
     count = 3
+    delay = 1
     msg = ''
     while count > 0:
         try:
@@ -30,10 +31,11 @@ def try_reconnect(obj, **kwargs):
 
             code = ex[0]
             msg = ex[1]
-            time.sleep(1)
+            time.sleep(delay)
+            delay += 2
             count -= 1
 
-    raise Exception(code, "Were executed 3 attempt to connect without success: * %s * " % msg)
+    raise Error(code, "Were executed 3 attempt to connect without success: * %s * " % msg)
 
 
 class SafeExecute(object):
@@ -46,7 +48,6 @@ class SafeExecute(object):
             except (MySQLError, Warning, Error, InterfaceError,
                     DatabaseError, DataError, OperationalError, IntegrityError,
                     InternalError, ProgrammingError, NotSupportedError) as ex:
-                print ex.args
                 if ex.args[0] in [1203, 2002, 2006, 2013, 2014, 2045, 2055]:
                     kw = {'host': self.connection.host,
                           'user': self.connection.user,
