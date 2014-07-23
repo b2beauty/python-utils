@@ -201,3 +201,16 @@ Example of use:
         queue.basic_qos(prefetch_count=1)
         queue.basic_consume(self.__loadPackageValue, queue=name)
         queue.start_consuming()
+
+    def deleteQueue(self, queue, name):
+        '''Delete a queue
+
+Example of use:
+
+    from navegg_utils import connect
+
+    connection = connect.Queue()
+    channel = connection.getQueue('')
+    connection.deleteQueue(channel,'name')'''
+
+        queue.deleteQueue(name)
