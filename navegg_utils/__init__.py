@@ -8,13 +8,14 @@ Created: 27/08/2013
 History:
     0.2 <2013-08-28> Add function dictfetchone
     0.3 <2013-09-02> Add decorator function timeit
+    0.4 <2014-08-26> Add function to remove especial charters
 '''
 
 import time
 import connect
 #import test
 
-__version__ = '0.1.9.1'
+__version__ = '0.1.9.2'
 
 
 def dictfetchall(cursor):
@@ -88,10 +89,18 @@ Out of execute is:
 
     return timed
 
+def rchar(word):
+    vSomeSpecialChars = [ "á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç","Á", "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç" ]
+    vReplacementChars = [ "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c","A", "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O", "O", "O", "U", "U", "U", "U", "C" ]
+    for x in range(len(vSomeSpecialChars)):
+        word = word.replace(vSomeSpecialChars[x], vReplacementChars[x] )
+    return word
+
 __all__ = [
     'connect',
     'dictfetchall',
     'dictfetchone',
     'timeit',
+    'rchar',
 #    'test'
 ]

@@ -9,3 +9,4 @@ v0.1.7, 2014-06-17 -- Fix zip exception
 v0.1.8, 2014-07-08 -- Add test basic classes
 v0.1.9, 2014-07-21 -- Add suport to dictcursor and charset in mysql function and use custom cursors class to safe errors in execution ans add Queue decorator to safe connection
 v0.1.9.1, 2014-07-23 -- Bug Fix: Return function on decorator for execute (Mysql Cursor)
+v0.1.9.2, 2014-08-26 -- Add Function to remove especial charters
