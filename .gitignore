@@ -1,0 +1,10 @@
+*.bak
+*~
+*.kate-swp
+*.mo
+*.gz
+*.pyc
+*.pyo
+*.swp
+*.gz
+build
