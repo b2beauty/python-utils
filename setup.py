@@ -23,5 +23,6 @@ setup(
         'pika >= 0.9.13',
         'MySQL-python >= 1.2',
         'simplejson >= 3.3',
+	'python-dateutil >= =2.2',
     ],
 )

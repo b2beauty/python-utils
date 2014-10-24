@@ -44,7 +44,7 @@ class SafeExecute(object):
 
         def do_safe(self, *args, **kwargs):
             try:
-                fn(self, *args, **kwargs)
+                return fn(self, *args, **kwargs)
             except (MySQLError, Warning, Error, InterfaceError,
                     DatabaseError, DataError, OperationalError, IntegrityError,
                     InternalError, ProgrammingError, NotSupportedError) as ex:
