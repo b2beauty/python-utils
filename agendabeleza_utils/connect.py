@@ -84,7 +84,7 @@ class SafeExecute(object):
 
         def do_safe(self, *args, **kwargs):
             try:
-                fn(self, *args, **kwargs)
+                return fn(self, *args, **kwargs)
             except (pika.exceptions.AMQPConnectionError,
                     pika.exceptions.ConnectionClosed,
                     pika.exceptions.ChannelClosed) as ex:
