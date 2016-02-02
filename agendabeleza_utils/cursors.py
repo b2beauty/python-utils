@@ -5,7 +5,7 @@
 This module implements Cursors of various types for MySQLdb. By
 default, MySQLdb uses the Cursor class.
 
-Changed by AgendaBeleza - <it@agendabeleza.com>"""
+Changed by Beauty Date - <it@beautydate.com>"""
 
 from MySQLdb.cursors import *
 from _mysql_exceptions import (MySQLError, Warning, Error, InterfaceError,
@@ -81,7 +81,7 @@ class Cursor(CursorStoreResultMixIn, CursorTupleRowsMixIn,
     """This is the standard Cursor class that returns rows as tuples
     and stores the result set in the client.
 
-    Changed by AgendaBeleza - <it@agendabeleza.com>"""
+    Changed by Beauty Date - <it@beautydate.com>"""
 
 
 class DictCursor(CursorStoreResultMixIn, CursorDictRowsMixIn,
@@ -90,7 +90,7 @@ class DictCursor(CursorStoreResultMixIn, CursorDictRowsMixIn,
     """This is a Cursor class that returns rows as dictionaries and
     stores the result set in the client.
 
-    Changed by AgendaBeleza - <it@agendabeleza.com>"""
+    Changed by Beauty Date - <it@beautydate.com>"""
 
 
 class SSCursor(CursorUseResultMixIn, CursorTupleRowsMixIn,
@@ -99,7 +99,7 @@ class SSCursor(CursorUseResultMixIn, CursorTupleRowsMixIn,
     """This is a Cursor class that returns rows as tuples and stores
     the result set in the server.
 
-    Changed by AgendaBeleza - <it@agendabeleza.com>"""
+    Changed by Beauty Date - <it@beautydate.com>"""
 
 
 class SSDictCursor(CursorUseResultMixIn, CursorDictRowsMixIn,
@@ -108,4 +108,4 @@ class SSDictCursor(CursorUseResultMixIn, CursorDictRowsMixIn,
     """This is a Cursor class that returns rows as dictionaries and
     stores the result set in the server.
 
-    Changed by AgendaBeleza - <it@agendabeleza.com>"""
+    Changed by Beauty Date - <it@beautydate.com>"""

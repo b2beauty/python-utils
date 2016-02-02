@@ -12,7 +12,7 @@ setup(
     author_email='salvachz@gmail.com',
     packages=['agendabeleza_utils'],
     scripts=[],
-    url='http://www.agendabeleza.com/',
+    url='https://beautydate.com.br/',
     license='LICENSE.txt',
     description='Agendabeleza Utils - Python Library.',
     long_description=open('README.txt').read(),

@@ -7,7 +7,7 @@ only one class: Connection. Others are unlikely. However, you might
 want to make your own subclasses. In most cases, you will probably
 override Connection.default_cursor with a non-standard Cursor class.
 
-Changed by AgendaBeleza - <it@agendabeleza.com>"""
+Changed by Beauty Date - <it@beautydate.com>"""
 
 from MySQLdb.connections import Connection
 from agendabeleza_utils import cursors
@@ -17,7 +17,7 @@ class Connection(Connection):
 
     """MySQL Database Connection Object
 
-    Changed by AgendaBeleza - <it@agendabeleza.com>"""
+    Changed by Beauty Date - <it@beautydate.com>"""
 
     default_cursor = cursors.Cursor
     host = None

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 
-'''A AgendaBeleza package
+'''A Beauty Date package
 
 Author <salvachz@gmail.com>
 Created: 26/08/2014
